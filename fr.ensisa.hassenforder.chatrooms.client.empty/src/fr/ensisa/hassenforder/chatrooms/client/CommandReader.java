@@ -14,8 +14,13 @@ public class CommandReader extends BasicAbstractReader {
 	public void receive() {
 		type = readInt ();
 		switch (type) {
-		case Protocol.RP_OK: break;
-		case Protocol.RP_KO: break;
+			case Protocol.RP_OK:
+				break;
+			case Protocol.RP_KO:
+				break;
+			case Protocol.RP_CHANNELS:
+				readString();
+				readInt();
 		}
 	}
 

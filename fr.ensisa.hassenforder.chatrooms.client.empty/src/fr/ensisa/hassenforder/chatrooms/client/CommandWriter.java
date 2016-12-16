@@ -15,5 +15,15 @@ public class CommandWriter extends BasicAbstractWriter {
 		writeInt(Protocol.RQ_CONNECT);
 		writeString(name);
 	}
+	
+	public void createChannel(String name, int mode) {
+		writeInt(Protocol.RQ_CHANNEL);
+		writeString(name);
+		writeInt(mode);
+	}
+	
+	public void createLoadChannel() {
+		writeInt(Protocol.RQ_LOAD);
+	}
 
 }
