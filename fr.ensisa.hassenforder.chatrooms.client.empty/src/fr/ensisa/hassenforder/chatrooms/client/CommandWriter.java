@@ -12,7 +12,7 @@ public class CommandWriter extends BasicAbstractWriter {
 	}
 
 	public void createConnect(String name) {
-		writeInt(Protocol.RP_CONNECT);
+		writeInt(Protocol.RQ_CONNECT);
 		writeString(name);
 	}
 
