@@ -21,6 +21,8 @@ public class CommandReader extends BasicAbstractReader {
 			case Protocol.RP_CHANNELS:
 				readString();
 				readInt();
+			case Protocol.RP_LOAD:
+				readString();
 		}
 	}
 
