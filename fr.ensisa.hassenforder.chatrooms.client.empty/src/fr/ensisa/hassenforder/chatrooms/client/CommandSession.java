@@ -64,6 +64,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
+			w.createChannel(name, channel ,type);
+			w.send();
+			r.receive();
+			if (r.getType() == Protocol.RP_OK) return true;
+			if (r.getType() == Protocol.RP_KO) return false;
 			return false;
 		} catch (IOException e) {
 			return false;
