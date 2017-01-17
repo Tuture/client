@@ -35,12 +35,26 @@ public class Channel {
     public boolean isSubscribed() {
         return subscribed;
     }
+    
+    // ajout de setter pour name type et Moderator
 
     public void setSubscribed(boolean subscribed) {
         this.subscribed = subscribed;
     }
 
-    @Override
+    public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setType(ChannelType type) {
+		this.type = type;
+	}
+
+	public void setModerator(String moderator) {
+		this.moderator = moderator;
+	}
+
+	@Override
     public String toString() {
         return "Channel{" + "name=" + name + ", type=" + type + ", subscribed=" + subscribed + '}';
     }

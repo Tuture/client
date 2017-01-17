@@ -2,6 +2,7 @@ package fr.ensisa.hassenforder.chatrooms.client;
 
 import java.io.OutputStream;
 
+import fr.ensisa.hassenforder.chatrooms.client.model.Channel;
 import fr.ensisa.hassenforder.chatrooms.client.model.ChannelType;
 import fr.ensisa.hassenforder.network.BasicAbstractWriter;
 import fr.ensisa.hassenforder.network.Protocol;
@@ -27,8 +28,21 @@ public class CommandWriter extends BasicAbstractWriter {
 			writeInt(1);
 	}
 	
-	public void createLoadChannel() {
+	public void createLoadChannel(String name) {
 		writeInt(Protocol.RQ_LOAD);
+		writeString(name);
+	}
+
+	public void createDisconnect(String name) {
+		writeInt(Protocol.RQ_DISCONNECT);
+		writeString(name);
+	}
+
+	public void createChannelSubscriptionChange(String name, Channel description, boolean selected) {
+		writeInt(Protocol.RQ_UNSUSCRIBE);
+		writeString(name);
+		writeString(description.getName());
+		writeBoolean(selected);
 	}
 
 }

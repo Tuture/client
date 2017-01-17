@@ -39,6 +39,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
+			w.createDisconnect(name);
+			w.send ();
+			r.receive();
+			if (r.getType() == Protocol.RP_OK) return true;
+			if (r.getType() == Protocol.RP_KO) return false;
 			return false;
 		} catch (IOException e) {
 			return false;
@@ -79,7 +84,10 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return null;
+			w.createLoadChannel(name);
+			w.send();
+			r.receive();
+			return r.getChannels();
 		} catch (IOException e) {
 			return null;
 		}
@@ -89,6 +97,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
+			w.createChannelSubscriptionChange(name, description, selected);
+			w.send();
+			r.receive();
+			if (r.getType() == Protocol.RP_OK) return true;
+			if (r.getType() == Protocol.RP_KO) return false;
 			return false;
 		} catch (IOException e) {
 			return false;
