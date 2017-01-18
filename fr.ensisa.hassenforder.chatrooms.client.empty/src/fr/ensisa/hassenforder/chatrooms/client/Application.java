@@ -156,7 +156,7 @@ public class Application implements GUIListener, NetworkListener {
     }
 
     @Override
-	public void notifyIncomingModerations(List<Message> messages) {
+	public void notifyIncomingMessageModerate(List<Message> messages) {
         if (model.isConnected()) {
         	model.getPendingMessages().clear();
         	model.getPendingMessages().addAll(messages);

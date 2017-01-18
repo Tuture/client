@@ -34,23 +34,24 @@ public class CommandReader extends BasicAbstractReader {
 
 	// Lecture de la liste de channel (pour load)
 	private void readChannels(int nbChannels) {
-		for(int i = 0; i < nbChannels && nbChannels > 0; i++) {
-			// Créer un Channel
-			Channel channel = new Channel();
-			// channel name
-			channel.setName(readString());
-			// Type du channel
-			int type = readInt();
-			ChannelType channelType;
-			if(type == 0) channelType = ChannelType.FREE;
-			else channelType = ChannelType.MODERATED;
-			channel.setType(channelType);
-			// le modérateur 
-			String moderator = readString();
-			if(moderator != null)
-				 channel.setModerator(moderator);
-			channel.setSubscribed(readBoolean());
-			channels.add(channel);
+		if(nbChannels > 0) { // Si il y a des channels à lire
+			for(int i = 1; i <= nbChannels; i++) {
+				// Créer un Channel
+				Channel channel = new Channel();
+				// channel name
+				channel.setName(readString());
+				// Type du channel
+				int type = readInt();
+				ChannelType channelType;
+				if(type == 0) channelType = ChannelType.FREE;
+				else channelType = ChannelType.MODERATED;
+				channel.setType(channelType);
+				// le modérateur
+				if(channel.getType() == ChannelType.MODERATED)
+					 channel.setModerator(readString());
+				channel.setSubscribed(readBoolean());
+				channels.add(channel);
+			}
 		}
 	}
 
