@@ -72,9 +72,16 @@ public class CommandSession {
 			w.createChannel(name, channel ,type);
 			w.send();
 			r.receive();
-			if (r.getType() == Protocol.RP_OK) return true;
-			if (r.getType() == Protocol.RP_KO) return false;
-			return false;
+			int t = r.getType();
+			System.out.println("before true " + t);
+			if (t == Protocol.RP_OK) {
+				System.out.println("true " + t);
+				return true;
+			}
+			else {
+				System.out.println(t);
+				return false;
+			}
 		} catch (IOException e) {
 			return false;
 		}

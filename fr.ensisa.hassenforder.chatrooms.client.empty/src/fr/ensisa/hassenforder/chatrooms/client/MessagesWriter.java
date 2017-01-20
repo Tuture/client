@@ -14,7 +14,6 @@ public class MessagesWriter extends BasicAbstractWriter {
 	public void sendName(String name){
 		this.writeInt(Protocol.RQ_CONNECT);
 		this.writeString(name);
-		this.send();
 	}
 
 }

@@ -71,6 +71,7 @@ public class MessagesSession extends Thread {
 		try {
 			MessagesWriter w = new MessagesWriter(connection.getOutputStream());
 			w.sendName(name);
+			w.send();
 		} catch (IOException e) {
 		}
 		while (true) {

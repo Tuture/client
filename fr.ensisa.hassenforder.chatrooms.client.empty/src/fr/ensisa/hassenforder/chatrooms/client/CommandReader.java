@@ -18,7 +18,9 @@ public class CommandReader extends BasicAbstractReader {
 	}
 
 	public void receive() {
+		System.out.println("Receiving result in command reader client");
 		type = readInt ();
+		System.out.println("Type : " + type);
 		switch (type) {
 			case Protocol.RP_OK:
 				break;
@@ -27,8 +29,10 @@ public class CommandReader extends BasicAbstractReader {
 			case Protocol.RP_CHANNELS:
 				// nombre de channels
 				readChannels(readInt());
+				break;
 			case Protocol.RP_LOAD:
 				readString();
+				break;
 		}
 	}
 
@@ -42,13 +46,13 @@ public class CommandReader extends BasicAbstractReader {
 				channel.setName(readString());
 				// Type du channel
 				int type = readInt();
-				ChannelType channelType;
-				if(type == 0) channelType = ChannelType.FREE;
-				else channelType = ChannelType.MODERATED;
-				channel.setType(channelType);
-				// le modérateur
-				if(channel.getType() == ChannelType.MODERATED)
-					 channel.setModerator(readString());
+				if(type == Protocol.FREE) {
+					channel.setType(ChannelType.FREE);
+				}
+				else {
+					channel.setType(ChannelType.MODERATED);
+					channel.setModerator(readString());
+				}
 				channel.setSubscribed(readBoolean());
 				channels.add(channel);
 			}

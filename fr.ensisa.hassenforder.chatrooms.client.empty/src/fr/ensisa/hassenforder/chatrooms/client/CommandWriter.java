@@ -21,13 +21,14 @@ public class CommandWriter extends BasicAbstractWriter {
 	}
 	
 	public void createChannel(String name, String channelName, ChannelType mode) {
+		System.out.println("sending request to create channel ...");
 		writeInt(Protocol.RQ_CHANNEL);
 		writeString(name);
 		writeString(channelName);
+		// writeInt(mode.ordinal());
 		if(mode.equals(ChannelType.FREE))
-			writeInt(0);
-		if(mode.equals(ChannelType.MODERATED))
-			writeInt(1);
+			writeInt(Protocol.FREE);
+		else writeInt(Protocol.MODERATED);
 	}
 	
 	public void createLoadChannel(String name) {
@@ -53,7 +54,6 @@ public class CommandWriter extends BasicAbstractWriter {
 		this.writeString(name);
 		this.writeInt(message.getId());
 		this.writeBoolean(approved);
-		this.send();
 		
 	}
 	
@@ -62,7 +62,6 @@ public class CommandWriter extends BasicAbstractWriter {
 		this.writeString(name);
 		this.writeString(channelName);
 		this.writeString(text);
-		this.send();
 	}
 
 }
